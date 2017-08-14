@@ -1,23 +1,25 @@
 MongoDB README
-mark: INstall cmd - elevated
-crete folders dat & log
+8.13.2017 markanderson: 
+SETUP
+Install cmd - elevated
+create folders dat & log
 C:\MongoDB\bin>mongod --directoryperdb --dbpath C:\mongodb\data\db --logpath C:\mongodb\log\mongo.log --logappend --rest --install
 
---Run Services
+--RUN Services
 net start MongoDB
 
--- we run in MOngo shell simply type mono from bin
+-- we run in MOngo shell simply type mongo from bin
+>MONGO
 >cls
---Show databases
+--SHOW databases
 >show dbs
 --shows one default database called: local
 
---create new database call my customers, and it would also switch to the db
+--USE create new database call my customers, and it would also switch to the db 
 >use mycustomers
 
---what databse am I in : keyword: db
+--DB active database what database am I in : keyword: db
 >db
-
 
 --create user
 use mycustomers
@@ -29,19 +31,19 @@ db.createUser(
 	}
 );
 
---Create Collections (Similar to tables in relational database) - hold documents or records
+--CREATECOLLECTION (tables) Create Collections (Similar to tables in relational database) - hold documents or records
 >db.createCollection('customers');
 
+--SHOWCOLLECTION
 >show collections
 
 --Insert Document into Collection: customers
 >db.customers.insert({first_name:"John",last_name:"Doe"});
 
---Find / See the documents in a collection
+--QUERY - FIND / See the documents in a collection
 >db.customers.find()
---FInd for readability
+--FIND PRETTY readability
 >db.customers.find().pretty();
-
 
 -->returns:{ "_id" : ObjectId("5991123dbdd383fb91d30fc2"), "first_name" : "John", "last_name" : "Doe" } 
 	--Unique id is automatically created.
@@ -53,6 +55,7 @@ db.createUser(
 
 --UPDATE field (in production, we'll use unique field like object ID)
 db.customers.update({first_name:"John"},{"first_name" : "John", "last_name" : "Doe",gender"M"});
+
 --to update only one field -oin order not to replace entire field use SET
 db.customers.update({first_name:"Steven"},{$set:{gender:"M"}})
 
@@ -114,6 +117,9 @@ db.customers.find().limit(2).sort({lat_name:1});
 --FOREACH itterate through
 db.customers.find().forEach(function(doc){print("Customer Name: "+doc.first_name)});
 
+
+
+SHARDING:  a method for distributing data across multiple machines. MongoDB uses sharding to support deployments with very large data sets and high throughput operations.
 
 
 --Document syntax (like JSON)
