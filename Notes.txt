@@ -21,6 +21,7 @@ net start MongoDB
 --DB active database what database am I in : keyword: db
 >db
 
+
 --create user
 use mycustomers
 db.createUser(
